@@ -15,7 +15,10 @@ const ArticleFeedItem = ({ item }) => {
         <View>
           {/* eslint-disable-next-line */}
           <Text style={styles.userId}>@{item.user.id}</Text>
-          <Text style={styles.updated_date}>{item.updated_at}</Text>
+          <Text style={styles.updated_date}>
+            {formatDate(item.updated_at)}
+            に更新
+          </Text>
         </View>
       </View>
       <View style={styles.contents}>
@@ -67,6 +70,10 @@ ArticleFeedItem.propTypes = {
     page_views_count: number,
     team_membership: shape(),
   }).isRequired,
+};
+
+const formatDate = (date) => {
+  return date.split('T')[0].split('-').join('').replace(/(\d{4})(\d{2})(\d{2})/, '$1年$2月$3日');
 };
 
 const styles = StyleSheet.create({
