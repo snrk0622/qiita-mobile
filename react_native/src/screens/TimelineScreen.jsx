@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import {
-  SafeAreaView, StyleSheet,
-} from 'react-native';
+import { SafeAreaView } from 'react-native';
 
 import NavList from '../components/NavList';
 import NavListItem from '../components/NavListItem';
@@ -24,17 +22,11 @@ const TimelineScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView>
       <NavList data={['All', ...tags]} renderItem={renderNavItem} />
       <ArticleFeedList data={articles} renderItem={renderFeedItem} />
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#F6F6F4',
-  },
-});
 
 export default TimelineScreen;

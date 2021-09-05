@@ -71,7 +71,7 @@ ArticleFeedItem.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 7,
+    marginVertical: 3.5,
     padding: 14,
     backgroundColor: 'white',
   },
