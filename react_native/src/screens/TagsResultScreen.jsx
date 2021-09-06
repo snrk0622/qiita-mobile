@@ -1,12 +1,25 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { FlatList, RefreshControl } from 'react-native';
 
-const TagsResultScreen = () => {
+import data from '../../assets/data/tags.json';
+import TagFeedItem from '../components/TagFeedItem';
+
+const renderItem = ({ item }) => {
   return (
-    <View>
-      <Text>Tags</Text>
-    </View>
+    <TagFeedItem item={item} />
   );
 };
 
-export default TagsResultScreen;
+const UsersResultScreen = () => {
+  return (
+    <FlatList
+      data={data}
+      renderItem={renderItem}
+      keyExtractor={(item) => { return item.id; }}
+      showsVerticalScrollIndicator={false}
+      refreshControl={<RefreshControl tintColor="rgba(51, 51, 51, 0.1)" />}
+    />
+  );
+};
+
+export default UsersResultScreen;
