@@ -1,11 +1,18 @@
 import React from 'react';
-import { SafeAreaView, Text } from 'react-native';
+import {
+  View, Text, TouchableWithoutFeedback, Keyboard,
+} from 'react-native';
+
+import SearchHeader from '../components/SearchHeader';
 
 const SearchScreen = () => {
   return (
-    <SafeAreaView>
-      <Text>searchScreen</Text>
-    </SafeAreaView>
+    <TouchableWithoutFeedback style={{ flex: 1 }} onPress={() => { Keyboard.dismiss(); }}>
+      <View>
+        <SearchHeader />
+        <Text>searchScreen</Text>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
