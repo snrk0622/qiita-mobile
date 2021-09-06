@@ -6,6 +6,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 import TimelineScreen from './src/screens/TimelineScreen';
 import SearchScreen from './src/screens/SearchScreen';
+import SearchHeader from './src/components/SearchHeader';
 
 const Tab = createBottomTabNavigator();
 
@@ -50,6 +51,9 @@ export default function App() {
             tabBarLabel: ({ focused }) => {
               const color = focused ? '#55C500' : 'rgba(51, 51, 51, 0.1)';
               return <Text style={{ color, fontSize: 10, fontWeight: 'bold' }}>検索</Text>;
+            },
+            header: () => {
+              return <SearchHeader />;
             },
           }}
         />

@@ -1,11 +1,6 @@
 import React from 'react';
-import {
-  View, Text, TouchableWithoutFeedback, Keyboard,
-} from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-import SearchHeader from '../components/SearchHeader';
-import SearchResults from '../components/SearchResults';
 import ArticlesResultScreen from './ArticlesResultScreen';
 import UsersResultScreen from './UsersResultScreen';
 import TagsResultScreen from './TagsResultScreen';
