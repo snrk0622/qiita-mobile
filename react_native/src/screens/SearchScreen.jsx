@@ -19,7 +19,7 @@ const SearchScreen = () => {
       }}
     >
       <TopTab.Screen
-        name="投稿"
+        name="記事"
         component={ArticlesResultScreen}
       />
       <TopTab.Screen

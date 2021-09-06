@@ -1,11 +1,24 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { FlatList, RefreshControl } from 'react-native';
+import ArticleFeedItem from '../components/ArticleFeedItem';
+
+import data from '../../assets/data/dammy.json';
+
+const renderItem = ({ item }) => {
+  return (
+    <ArticleFeedItem item={item} />
+  );
+};
 
 const ArticlesResultScreen = () => {
   return (
-    <View>
-      <Text>Articles</Text>
-    </View>
+    <FlatList
+      data={data}
+      renderItem={renderItem}
+      keyExtractor={(item) => { return item.id; }}
+      showsVerticalScrollIndicator={false}
+      refreshControl={<RefreshControl tintColor="rgba(51, 51, 51, 0.1)" />}
+    />
   );
 };
 
