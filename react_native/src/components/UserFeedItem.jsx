@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View, Text, Image, StyleSheet, TouchableOpacity
+  View, Text, Image, StyleSheet, TouchableOpacity,
 } from 'react-native';
 import {
   string, number, shape, oneOf, bool,

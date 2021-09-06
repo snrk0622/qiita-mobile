@@ -1,6 +1,5 @@
 import React from 'react';
 import { FlatList, RefreshControl } from 'react-native';
-import ArticleFeedItem from '../components/ArticleFeedItem';
 
 import data from '../../assets/data/users.json';
 import UserFeedItem from '../components/UserFeedItem';
