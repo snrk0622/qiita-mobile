@@ -43,7 +43,6 @@ export default function App() {
           name="Search"
           component={SearchScreen}
           options={{
-            headerShown: false,
             tabBarIcon: ({ focused }) => {
               const color = focused ? '#55C500' : 'rgba(51, 51, 51, 0.1)';
               return <FontAwesome5 name="search" size={24} color={color} />;
