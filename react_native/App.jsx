@@ -7,6 +7,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import TimelineScreen from './src/screens/TimelineScreen';
 import SearchScreen from './src/screens/SearchScreen';
 import SearchHeader from './src/components/SearchHeader';
+import MypageScreen from './src/screens/MypageScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -54,6 +55,20 @@ export default function App() {
             },
             header: () => {
               return <SearchHeader />;
+            },
+          }}
+        />
+        <Tab.Screen
+          name="Mypage"
+          component={MypageScreen}
+          options={{
+            tabBarIcon: ({ focused }) => {
+              const color = focused ? '#55C500' : 'rgba(51, 51, 51, 0.1)';
+              return <FontAwesome5 name="user-circle" size={24} color={color} />;
+            },
+            tabBarLabel: ({ focused }) => {
+              const color = focused ? '#55C500' : 'rgba(51, 51, 51, 0.1)';
+              return <Text style={{ color, fontSize: 10, fontWeight: 'bold' }}>あなた</Text>;
             },
           }}
         />
