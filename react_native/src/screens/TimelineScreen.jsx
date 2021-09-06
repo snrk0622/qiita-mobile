@@ -6,7 +6,7 @@ import NavListItem from '../components/NavListItem';
 import ArticleFeedList from '../components/ArticleFeedList';
 import ArticleFeedItem from '../components/ArticleFeedItem';
 
-import articles from '../../assets/data/dammy.json';
+import articles from '../../assets/data/articles.json';
 
 const TimelineScreen = () => {
   const tags = ['React', 'Vue', 'Laravel', 'TypeScript'];

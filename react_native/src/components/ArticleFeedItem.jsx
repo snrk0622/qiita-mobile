@@ -9,7 +9,7 @@ import { Feather, FontAwesome5 } from '@expo/vector-icons';
 
 const ArticleFeedItem = ({ item }) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container}>
       <View style={styles.header}>
         <Image source={{ uri: item.user.profile_image_url }} style={styles.userImage} />
         <View>
@@ -46,7 +46,7 @@ const ArticleFeedItem = ({ item }) => {
           <FontAwesome5 name="external-link-alt" style={styles.linkIcon} />
         </TouchableOpacity>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
