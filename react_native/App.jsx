@@ -29,11 +29,11 @@ export default function App() {
           name="Timeline"
           component={TimelineScreen}
           options={{
-            tabBarIcon: (focused) => {
+            tabBarIcon: ({ focused }) => {
               const color = focused ? '#55C500' : 'rgba(51, 51, 51, 0.1)';
               return <FontAwesome5 name="clock" size={24} color={color} />;
             },
-            tabBarLabel: (focused) => {
+            tabBarLabel: ({ focused }) => {
               const color = focused ? '#55C500' : 'rgba(51, 51, 51, 0.1)';
               return <Text style={{ color, fontSize: 10, fontWeight: 'bold' }}>タイムライン</Text>;
             },
@@ -44,13 +44,13 @@ export default function App() {
           component={SearchScreen}
           options={{
             headerShown: false,
-            tabBarIcon: (focused) => {
+            tabBarIcon: ({ focused }) => {
               const color = focused ? '#55C500' : 'rgba(51, 51, 51, 0.1)';
               return <FontAwesome5 name="search" size={24} color={color} />;
             },
-            tabBarLabel: (focused) => {
+            tabBarLabel: ({ focused }) => {
               const color = focused ? '#55C500' : 'rgba(51, 51, 51, 0.1)';
-              return <Text style={{ color, fontSize: 10, fontWeight: 'bold' }}>タイムライン</Text>;
+              return <Text style={{ color, fontSize: 10, fontWeight: 'bold' }}>検索</Text>;
             },
           }}
         />
