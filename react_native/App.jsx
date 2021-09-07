@@ -10,6 +10,7 @@ import TimelineScreen from './src/screens/TimelineScreen';
 import SearchScreen from './src/screens/SearchScreen';
 import SearchHeader from './src/components/SearchHeader';
 import MypageScreen from './src/screens/MypageScreen';
+import Header from './src/components/Header';
 import MypageHeader from './src/components/MypageHeader';
 
 const Tab = createBottomTabNavigator();
@@ -19,15 +20,7 @@ export default function App() {
     <NavigationContainer style={styles.container}>
       <Tab.Navigator
         screenOptions={{
-          headerTitle: 'Qiita',
-          headerStyle: {
-            height: 90,
-            backgroundColor: '#55C500',
-          },
-          headerTitleStyle: {
-            fontSize: 20,
-            color: 'white',
-          },
+          tabBarShowLabel: false,
         }}
       >
         <Tab.Screen
@@ -41,6 +34,9 @@ export default function App() {
             tabBarLabel: ({ focused }) => {
               const color = focused ? '#55C500' : 'rgba(51, 51, 51, 0.1)';
               return <Text style={{ color, fontSize: 10, fontWeight: 'bold' }}>タイムライン</Text>;
+            },
+            header: () => {
+              return <Header />;
             },
           }}
         />
