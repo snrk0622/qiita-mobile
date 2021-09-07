@@ -20,15 +20,7 @@ export default function App() {
     <NavigationContainer style={styles.container}>
       <Tab.Navigator
         screenOptions={{
-          headerTitle: 'Qiita',
-          headerStyle: {
-            height: 90,
-            backgroundColor: '#55C500',
-          },
-          headerTitleStyle: {
-            fontSize: 20,
-            color: 'white',
-          },
+          tabBarShowLabel: false,
         }}
       >
         <Tab.Screen
