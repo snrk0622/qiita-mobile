@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList, RefreshControl, StyleSheet } from 'react-native';
 import { arrayOf, shape, func } from 'prop-types';
 
 const ArticleFeedList = ({ data, renderItem }) => {
@@ -9,6 +9,7 @@ const ArticleFeedList = ({ data, renderItem }) => {
       renderItem={renderItem}
       keyExtractor={(item) => { return item.id; }}
       showsVerticalScrollIndicator={false}
+      refreshControl={<RefreshControl tintColor="rgba(51, 51, 51, 0.1)" />}
       style={styles.container}
     />
   );
