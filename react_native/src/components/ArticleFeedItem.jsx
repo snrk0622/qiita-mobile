@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
     marginBottom: 7,
     fontSize: 18,
     fontWeight: 'bold',
+    color: '#333333',
   },
   updated_date: {
     fontSize: 12,
@@ -109,6 +110,7 @@ const styles = StyleSheet.create({
   title: {
     marginBottom: 14,
     fontWeight: 'bold',
+    color: '#333333',
   },
   body: {
     height: 100,
