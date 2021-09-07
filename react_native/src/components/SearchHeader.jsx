@@ -30,7 +30,6 @@ const SearchHeader = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 90,
     backgroundColor: '#55C500',
   },
   safeAreaView: {
@@ -42,8 +41,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    height: 35,
+    height: 30,
     marginRight: 14,
+    marginVertical: 10,
     paddingLeft: 14,
     paddingRight: 7,
     backgroundColor: 'white',
