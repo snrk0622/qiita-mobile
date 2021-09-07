@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View, Image, Text, StyleSheet,
+  View, Image, Text, StyleSheet, ScrollView, RefreshControl,
 } from 'react-native';
 import {
   shape, string, number, bool,
@@ -10,28 +10,33 @@ import Header from './Header';
 
 const MypageHeader = ({ user }) => {
   return (
-    <View>
+    <View style={styles.container}>
       <Header />
-      <View style={styles.userInfo}>
-        <Image source={{ uri: user.profile_image_url }} style={styles.userImage} />
-        <View style={styles.analysisItem}>
-          <Text style={styles.analysisNumber}>{user.items_count}</Text>
-          <Text style={styles.analysisUnit}>記事</Text>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        refreshControl={<RefreshControl tintColor="rgba(51, 51, 51, 0.1)" />}
+      >
+        <View style={styles.userInfo}>
+          <Image source={{ uri: user.profile_image_url }} style={styles.userImage} />
+          <View style={styles.analysisItem}>
+            <Text style={styles.analysisNumber}>{user.items_count}</Text>
+            <Text style={styles.analysisUnit}>記事</Text>
+          </View>
+          <View style={styles.analysisItem}>
+            <Text style={styles.analysisNumber}>{user.followees_count}</Text>
+            <Text style={styles.analysisUnit}>フォロー</Text>
+          </View>
+          <View style={styles.analysisItem}>
+            <Text style={styles.analysisNumber}>{user.followers_count}</Text>
+            <Text style={styles.analysisUnit}>フォロワー</Text>
+          </View>
         </View>
-        <View style={styles.analysisItem}>
-          <Text style={styles.analysisNumber}>{user.followees_count}</Text>
-          <Text style={styles.analysisUnit}>フォロー</Text>
+        <View style={styles.userProfile}>
+          {/* eslint-disable-next-line */}
+          <Text style={styles.userId}>@{user.id}</Text>
+          <Text style={styles.userDesc}>{user.description}</Text>
         </View>
-        <View style={styles.analysisItem}>
-          <Text style={styles.analysisNumber}>{user.followers_count}</Text>
-          <Text style={styles.analysisUnit}>フォロワー</Text>
-        </View>
-      </View>
-      <View style={styles.userProfile}>
-        {/* eslint-disable-next-line */}
-        <Text style={styles.userId}>@{user.id}</Text>
-        <Text style={styles.userDesc}>{user.description}</Text>
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -59,6 +64,7 @@ MypageHeader.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
+    marginBottom: 28,
   },
   userInfo: {
     marginRight: 20,
