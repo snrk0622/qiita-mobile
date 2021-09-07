@@ -21,7 +21,6 @@ ArticleFeedList.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 40,
     paddingBottom: 7,
   },
 });
