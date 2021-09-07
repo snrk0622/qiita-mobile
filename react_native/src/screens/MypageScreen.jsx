@@ -2,9 +2,7 @@ import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { Feather, FontAwesome5 } from '@expo/vector-icons';
 
-import ArticlesResultScreen from './ArticlesResultScreen';
-import UsersResultScreen from './UsersResultScreen';
-import TagsResultScreen from './TagsResultScreen';
+import ProfileArticles from '../components/ProfileArticles';
 
 const TopTab = createMaterialTopTabNavigator();
 
@@ -21,7 +19,7 @@ const MypageScreen = () => {
     >
       <TopTab.Screen
         name="記事"
-        component={ArticlesResultScreen}
+        component={ProfileArticles}
         options={{
           tabBarIcon: ({ focused }) => {
             const color = focused ? '#55C500' : 'rgba(51, 51, 51, 0.1)';
@@ -31,7 +29,7 @@ const MypageScreen = () => {
       />
       <TopTab.Screen
         name="ユーザー"
-        component={UsersResultScreen}
+        component={ProfileArticles}
         options={{
           tabBarIcon: ({ focused }) => {
             const color = focused ? '#55C500' : 'rgba(51, 51, 51, 0.1)';
@@ -41,7 +39,7 @@ const MypageScreen = () => {
       />
       <TopTab.Screen
         name="タグ"
-        component={TagsResultScreen}
+        component={ProfileArticles}
         options={{
           tabBarIcon: ({ focused }) => {
             const color = focused ? '#55C500' : 'rgba(51, 51, 51, 0.1)';
