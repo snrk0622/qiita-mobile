@@ -11,7 +11,10 @@ import { Feather, FontAwesome5 } from '@expo/vector-icons';
 const ArticleFeedItem = ({ item }) => {
   const navigation = useNavigation();
   return (
-    <TouchableOpacity onPress={() => { navigation.navigate('ArticleDetail'); }} style={styles.container}>
+    <TouchableOpacity
+      onPress={() => { navigation.navigate('ArticleDetail', { title: item.title }); }}
+      style={styles.container}
+    >
       <View style={styles.header}>
         <Image source={{ uri: item.user.profile_image_url }} style={styles.userImage} />
         <View>
