@@ -2,14 +2,16 @@ import React from 'react';
 import {
   View, Text, Image, StyleSheet, TouchableOpacity,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import {
   shape, number, string, bool, arrayOf,
 } from 'prop-types';
 import { Feather, FontAwesome5 } from '@expo/vector-icons';
 
 const ArticleFeedItem = ({ item }) => {
+  const navigation = useNavigation();
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity onPress={() => { navigation.navigate('ArticleDetail'); }} style={styles.container}>
       <View style={styles.header}>
         <Image source={{ uri: item.user.profile_image_url }} style={styles.userImage} />
         <View>
