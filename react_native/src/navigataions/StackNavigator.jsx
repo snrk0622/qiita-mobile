@@ -22,7 +22,7 @@ const StackNavigator = () => {
         component={ArticleDetail}
         options={{
           header: ({ route, back }) => {
-            return back ? <ArticleDetailHeader title={route.params.title} /> : undefined;
+            return back ? <ArticleDetailHeader item={route.params.item} /> : undefined;
           },
         }}
       />

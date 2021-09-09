@@ -8,11 +8,13 @@ import {
 } from 'prop-types';
 import { Feather, FontAwesome5 } from '@expo/vector-icons';
 
+import formatDate from '../utils/formatDate';
+
 const ArticleFeedItem = ({ item }) => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
-      onPress={() => { navigation.navigate('ArticleDetail', { title: item.title }); }}
+      onPress={() => { navigation.navigate('ArticleDetail', { item }); }}
       style={styles.container}
     >
       <View style={styles.header}>
@@ -75,10 +77,6 @@ ArticleFeedItem.propTypes = {
     page_views_count: number,
     team_membership: shape(),
   }).isRequired,
-};
-
-const formatDate = (date) => {
-  return date.split('T')[0].split('-').join('').replace(/(\d{4})(\d{2})(\d{2})/, '$1年$2月$3日');
 };
 
 const styles = StyleSheet.create({

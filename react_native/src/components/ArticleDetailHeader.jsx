@@ -3,10 +3,12 @@ import {
   View, SafeAreaView, Text, StyleSheet, TouchableWithoutFeedback,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { string } from 'prop-types';
+import {
+  shape, string, number, bool, arrayOf,
+} from 'prop-types';
 import { Ionicons } from '@expo/vector-icons';
 
-const ArticleDetailHeader = ({ title }) => {
+const ArticleDetailHeader = ({ item }) => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
@@ -18,7 +20,7 @@ const ArticleDetailHeader = ({ title }) => {
           >
             <Ionicons name="chevron-back" size={30} color="white" style={styles.backIcon} />
           </TouchableWithoutFeedback>
-          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.title}>{title}</Text>
+          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.title}>{item.title}</Text>
           <TouchableWithoutFeedback>
             <Ionicons name="chevron-back" size={30} color="black" style={{ ...styles.backIcon, ...styles.backIconOpacity }} />
           </TouchableWithoutFeedback>
@@ -29,7 +31,25 @@ const ArticleDetailHeader = ({ title }) => {
 };
 
 ArticleDetailHeader.propTypes = {
-  title: string.isRequired,
+  item: shape({
+    rendered_body: string,
+    body: string,
+    coedeting: bool,
+    comments_count: number,
+    created_at: string,
+    group: shape(),
+    id: string,
+    likes_count: number,
+    private: bool,
+    reactions_count: number,
+    tags: arrayOf(shape()),
+    title: string,
+    updated_at: string,
+    url: string,
+    user: shape(),
+    page_views_count: number,
+    team_membership: shape(),
+  }).isRequired,
 };
 
 const styles = StyleSheet.create({
