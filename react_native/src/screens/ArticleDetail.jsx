@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import RenderHtml from 'react-native-render-html';
+import AlertMessage from '../components/AlertMessage';
 
 import formatDate from '../utils/formatDate';
 
@@ -17,6 +18,7 @@ const ArticleDetail = () => {
       showsVerticalScrollIndicator={false}
       style={styles.container}
     >
+      <AlertMessage updatedAt={item.updated_at} />
       <View style={styles.header}>
         <View style={styles.headerUserInfo}>
           <Image source={{ uri: item.user.profile_image_url }} style={styles.headerUserImage} />
