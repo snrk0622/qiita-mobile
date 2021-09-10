@@ -50,6 +50,7 @@ const ArticleDetail = () => {
         <RenderHtml
           contentWidth={width}
           source={{ html: item.rendered_body }}
+          ignoredDomTags={['qiita-embed-ogp']}
           baseStyle={baseStyles.base}
           tagsStyles={tagsStyles}
           classesStyles={classesStyles}
