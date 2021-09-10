@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View, Text, Image, StyleSheet, TouchableOpacity,
+  View, Text, Image, StyleSheet, TouchableOpacity, TouchableWithoutFeedback,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {
@@ -13,29 +13,34 @@ import formatDate from '../utils/formatDate';
 const ArticleFeedItem = ({ item }) => {
   const navigation = useNavigation();
   return (
-    <TouchableOpacity
-      onPress={() => { navigation.navigate('ArticleDetail', { item }); }}
-      style={styles.container}
-    >
-      <View style={styles.header}>
-        <Image source={{ uri: item.user.profile_image_url }} style={styles.userImage} />
-        <View>
-          {/* eslint-disable-next-line */}
-          <Text style={styles.userId}>@{item.user.id}</Text>
-          <Text style={styles.updated_date}>
-            {formatDate(item.updated_at)}
-            に更新
-          </Text>
+    <View style={styles.container}>
+      <TouchableWithoutFeedback
+        onPress={() => { navigation.navigate('UserDetail', { user: item.user }); }}
+      >
+        <View style={styles.header}>
+          <Image source={{ uri: item.user.profile_image_url }} style={styles.userImage} />
+          <View>
+            {/* eslint-disable-next-line */}
+            <Text style={styles.userId}>@{item.user.id}</Text>
+            <Text style={styles.updated_date}>
+              {formatDate(item.updated_at)}
+              に更新
+            </Text>
+          </View>
         </View>
-      </View>
-      <View style={styles.contents}>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.body}>{item.body}</Text>
-        <View style={styles.tags}>
-          <FontAwesome5 name="tags" style={styles.tagsIcon} />
-          <Text style={styles.tagsText}>{item.tags.map((tag) => { return tag.name; }).join(', ')}</Text>
+      </TouchableWithoutFeedback>
+      <TouchableWithoutFeedback
+        onPress={() => { navigation.navigate('ArticleDetail', { item }); }}
+      >
+        <View style={styles.contents}>
+          <Text style={styles.title}>{item.title}</Text>
+          <Text style={styles.body}>{item.body}</Text>
+          <View style={styles.tags}>
+            <FontAwesome5 name="tags" style={styles.tagsIcon} />
+            <Text style={styles.tagsText}>{item.tags.map((tag) => { return tag.name; }).join(', ')}</Text>
+          </View>
         </View>
-      </View>
+      </TouchableWithoutFeedback>
       <View style={styles.footer}>
         <TouchableOpacity style={styles.footerItem}>
           <FontAwesome5 name="heart" style={styles.footerItemIcon} />
@@ -53,7 +58,7 @@ const ArticleFeedItem = ({ item }) => {
           <FontAwesome5 name="external-link-alt" style={styles.linkIcon} />
         </TouchableOpacity>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 
