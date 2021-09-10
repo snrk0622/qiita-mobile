@@ -3,7 +3,7 @@ import {
   View, Text, Image, StyleSheet, TouchableOpacity,
 } from 'react-native';
 import {
-  string, number, shape, oneOf, bool,
+  string, number, shape, bool,
 } from 'prop-types';
 
 const UserFeedItem = ({ item }) => {
@@ -23,21 +23,21 @@ const UserFeedItem = ({ item }) => {
 UserFeedItem.propTypes = {
   item: shape({
     description: string,
-    facebook_id: oneOf([string, null]),
+    facebook_id: string,
     followees_count: number,
     followers_count: number,
-    github_login_name: oneOf([string, null]),
+    github_login_name: string,
     id: string,
     items_count: number,
-    linkedin_id: oneOf([string, null]),
-    location: oneOf([string, null]),
-    name: oneOf([string, null]),
-    organization: oneOf([string, null]),
+    linkedin_id: string,
+    location: string,
+    name: string,
+    organization: string,
     permanent_id: number,
     profile_image_url: string,
     team_only: bool,
-    twitter_screen_name: oneOf([string, null]),
-    website_url: oneOf([string, null]),
+    twitter_screen_name: string,
+    website_url: string,
   }).isRequired,
 };
 
