@@ -6,7 +6,7 @@ import { string } from 'prop-types';
 const AlertMessage = ({ updatedAt }) => {
   const now = new Date();
   // eslint-disable-next-line
-  const today = now.getFullYear().toString() + '0'+(now.getMonth()+1).toString().slice(-2) + '0'+now.getDate().toString().slice(-2);
+  const today = now.getFullYear().toString() + ('0'+(now.getMonth()+1)).slice(-2) + ('0'+now.getDate()).slice(-2);
   const fmtUpdatedAt = updatedAt.split('T')[0].split('-').join('');
   const howLongAgo = Math.floor((today - fmtUpdatedAt) / 10000);
   if (howLongAgo >= 1) {
