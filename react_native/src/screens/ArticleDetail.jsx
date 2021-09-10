@@ -1,79 +1,96 @@
-import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
-import { useRoute } from '@react-navigation/native';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ScrollView, View, StyleSheet, useWindowDimensions, Text, Image,
 } from 'react-native';
+import { useRoute } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import RenderHtml from 'react-native-render-html';
+import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
+
 import AlertMessage from '../components/AlertMessage';
+import ArticleDetailFooter from '../components/ArticleDetailFooter';
 
 import formatDate from '../utils/formatDate';
+import useScroll from '../utils/useScroll';
 
 const ArticleDetail = () => {
   const { item } = useRoute().params;
+  const [isFooterActive, toggleFooter] = useState(true);
+  const { onScroll, onScrollBeginDrag } = useScroll({
+    onScrollDown: () => {
+      toggleFooter(false);
+    },
+    onScrollUp: () => {
+      toggleFooter(true);
+    },
+  });
   const { width } = useWindowDimensions();
   return (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
-      style={styles.container}
-    >
-      <AlertMessage updatedAt={item.updated_at} />
-      <View style={styles.header}>
-        <View style={styles.headerUserInfo}>
-          <Image source={{ uri: item.user.profile_image_url }} style={styles.headerUserImage} />
-          {/* eslint-disable-next-line */}
-          <Text style={styles.headerUserName}>@{item.user.id}</Text>
-          {/* eslint-disable-next-line */}
-          <Text style={styles.updated_at}>が{formatDate(item.updated_at)}に更新</Text>
+    <View style={styles.container}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        onScroll={onScroll}
+        onScrollBeginDrag={onScrollBeginDrag}
+      >
+        <AlertMessage updatedAt={item.updated_at} />
+        <View style={styles.header}>
+          <View style={styles.headerUserInfo}>
+            <Image source={{ uri: item.user.profile_image_url }} style={styles.headerUserImage} />
+            {/* eslint-disable-next-line */}
+            <Text style={styles.headerUserName}>@{item.user.id}</Text>
+            {/* eslint-disable-next-line */}
+            <Text style={styles.updated_at}>が{formatDate(item.updated_at)}に更新</Text>
+          </View>
+          <Text style={styles.title}>{item.title}</Text>
+          <View style={styles.tags}>
+            <FontAwesome5 name="tags" style={styles.tagsIcon} />
+            <Text style={styles.tagsText}>{item.tags.map((tag) => { return tag.name; }).join(', ')}</Text>
+          </View>
         </View>
-        <Text style={styles.title}>{item.title}</Text>
-        <View style={styles.tags}>
-          <FontAwesome5 name="tags" style={styles.tagsIcon} />
-          <Text style={styles.tagsText}>{item.tags.map((tag) => { return tag.name; }).join(', ')}</Text>
-        </View>
-      </View>
-      <RenderHtml
-        contentWidth={width}
-        source={{ html: item.rendered_body }}
-        baseStyle={baseStyles.base}
-        tagsStyles={tagsStyles}
-        classesStyles={classesStyles}
-      />
-      <View style={styles.footer}>
-        <View style={styles.footerUserInfo}>
-          <Image source={{ uri: item.user.profile_image_url }} style={styles.footerUserImage} />
-          <View style={styles.footerUserText}>
-            {/* eslint-disable-next-line */}
-            { item.user.name ? <Text style={styles.footerUserName}>{item.user.name}</Text> : undefined }
-            {/* eslint-disable-next-line */}
-            <Text style={styles.footerUserId}>@{item.user.id}</Text>
-            {/* eslint-disable-next-line */}
-            { item.user.description ? <Text style={styles.footerUserDesc}>{item.user.description}</Text> : undefined }
-            <View style={styles.footerUserBtns}>
-              <TouchableOpacity style={styles.userFollowBtn}>
-                <Text style={styles.userFollowText}>フォロー</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.snsIcon}>
-                <FontAwesome name="link" size={fontSize * 1.5} color={item.user.website_url ? 'rgba(51, 51, 51, 0.6)' : 'rgba(51, 51, 51, 0.1)'} />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.snsIcon}>
-                <FontAwesome name="github" size={fontSize * 1.5} color={item.user.github_login_name ? 'rgba(51, 51, 51, 0.6)' : 'rgba(51, 51, 51, 0.1)'} />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.snsIcon}>
-                <FontAwesome name="twitter" size={fontSize * 1.5} color={item.user.twitter_screen_name ? 'rgba(51, 51, 51, 0.6)' : 'rgba(51, 51, 51, 0.1)'} />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.snsIcon}>
-                <FontAwesome name="facebook" size={fontSize * 1.5} color={item.user.facebook_id ? 'rgba(51, 51, 51, 0.6)' : 'rgba(51, 51, 51, 0.1)'} />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.snsIcon}>
-                <FontAwesome name="feed" size={fontSize * 1.5} color="rgba(51, 51, 51, 0.6)" />
-              </TouchableOpacity>
+        <RenderHtml
+          contentWidth={width}
+          source={{ html: item.rendered_body }}
+          baseStyle={baseStyles.base}
+          tagsStyles={tagsStyles}
+          classesStyles={classesStyles}
+        />
+        <View style={styles.footer}>
+          <View style={styles.footerUserInfo}>
+            <Image source={{ uri: item.user.profile_image_url }} style={styles.footerUserImage} />
+            <View style={styles.footerUserText}>
+              {/* eslint-disable-next-line */}
+              { item.user.name ? <Text style={styles.footerUserName}>{item.user.name}</Text> : undefined }
+              {/* eslint-disable-next-line */}
+              <Text style={styles.footerUserId}>@{item.user.id}</Text>
+              {/* eslint-disable-next-line */}
+              { item.user.description ? <Text style={styles.footerUserDesc}>{item.user.description}</Text> : undefined }
+              <View style={styles.footerUserBtns}>
+                <TouchableOpacity style={styles.userFollowBtn}>
+                  <Text style={styles.userFollowText}>フォロー</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.snsIcon}>
+                  <FontAwesome name="link" size={fontSize * 1.5} color={item.user.website_url ? 'rgba(51, 51, 51, 0.6)' : 'rgba(51, 51, 51, 0.1)'} />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.snsIcon}>
+                  <FontAwesome name="github" size={fontSize * 1.5} color={item.user.github_login_name ? 'rgba(51, 51, 51, 0.6)' : 'rgba(51, 51, 51, 0.1)'} />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.snsIcon}>
+                  <FontAwesome name="twitter" size={fontSize * 1.5} color={item.user.twitter_screen_name ? 'rgba(51, 51, 51, 0.6)' : 'rgba(51, 51, 51, 0.1)'} />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.snsIcon}>
+                  <FontAwesome name="facebook" size={fontSize * 1.5} color={item.user.facebook_id ? 'rgba(51, 51, 51, 0.6)' : 'rgba(51, 51, 51, 0.1)'} />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.snsIcon}>
+                  <FontAwesome name="feed" size={fontSize * 1.5} color="rgba(51, 51, 51, 0.6)" />
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+      {/* eslint-disable-next-line */}
+      { isFooterActive && <ArticleDetailFooter likesCount={item.likes_count} commentsCount={item.comments_count} /> }
+    </View>
   );
 };
 
