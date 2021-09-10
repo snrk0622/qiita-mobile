@@ -3,15 +3,16 @@ import {
   ScrollView, View, StyleSheet, useWindowDimensions, Text, Image,
 } from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import RenderHtml from 'react-native-render-html';
-import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 import AlertMessage from '../components/AlertMessage';
 import ArticleDetailFooter from '../components/ArticleDetailFooter';
 
 import formatDate from '../utils/formatDate';
 import useScroll from '../utils/useScroll';
+import FollowButton from '../components/FollowButton';
+import SNSButton from '../components/SNSButton';
 
 const ArticleDetail = () => {
   const { item } = useRoute().params;
@@ -66,24 +67,12 @@ const ArticleDetail = () => {
               {/* eslint-disable-next-line */}
               { item.user.description ? <Text style={styles.footerUserDesc}>{item.user.description}</Text> : undefined }
               <View style={styles.footerUserBtns}>
-                <TouchableOpacity style={styles.userFollowBtn}>
-                  <Text style={styles.userFollowText}>フォロー</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.snsIcon}>
-                  <FontAwesome name="link" size={fontSize * 1.5} color={item.user.website_url ? 'rgba(51, 51, 51, 0.6)' : 'rgba(51, 51, 51, 0.1)'} />
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.snsIcon}>
-                  <FontAwesome name="github" size={fontSize * 1.5} color={item.user.github_login_name ? 'rgba(51, 51, 51, 0.6)' : 'rgba(51, 51, 51, 0.1)'} />
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.snsIcon}>
-                  <FontAwesome name="twitter" size={fontSize * 1.5} color={item.user.twitter_screen_name ? 'rgba(51, 51, 51, 0.6)' : 'rgba(51, 51, 51, 0.1)'} />
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.snsIcon}>
-                  <FontAwesome name="facebook" size={fontSize * 1.5} color={item.user.facebook_id ? 'rgba(51, 51, 51, 0.6)' : 'rgba(51, 51, 51, 0.1)'} />
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.snsIcon}>
-                  <FontAwesome name="feed" size={fontSize * 1.5} color="rgba(51, 51, 51, 0.6)" />
-                </TouchableOpacity>
+                <FollowButton />
+                <SNSButton name="link" link={item.user.website_url} />
+                <SNSButton name="github" link={item.user.github_login_name} />
+                <SNSButton name="twitter" link={item.user.twitter_screen_name} />
+                <SNSButton name="facebook" link={item.user.facebook_id} />
+                <SNSButton name="feed" />
               </View>
             </View>
           </View>
@@ -173,24 +162,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-  },
-  userFollowBtn: {
-    width: 80,
-    height: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 2,
-    borderColor: 'rgb(194, 194, 195)',
-    backgroundColor: 'rgb(242, 242, 242)',
-    color: 'rgb(110, 111, 112)',
-  },
-  userFollowText: {
-    fontWeight: 'bold',
-    color: 'rgba(51, 51, 51, 0.6)',
-  },
-  snsIcon: {
-    fontSize: fontSize * 1.5,
-    color: 'rgba(51, 51, 51, 0.6)',
   },
 });
 
