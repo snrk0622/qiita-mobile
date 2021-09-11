@@ -1,15 +1,21 @@
 import React from 'react';
 import { FlatList, RefreshControl, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 import { arrayOf, shape, func } from 'prop-types';
 
-const ArticleFeedList = ({ data, renderItem }) => {
+import { fetchTimeline } from '../modules/timeline/action';
+
+const ArticleFeedList = ({ data, renderItem, fetchArticles }) => {
+  const onRefresh = () => {
+    fetchArticles();
+  };
   return (
     <FlatList
       data={data}
       renderItem={renderItem}
       keyExtractor={(item) => { return item.id; }}
       showsVerticalScrollIndicator={false}
-      refreshControl={<RefreshControl tintColor="rgba(51, 51, 51, 0.1)" />}
+      refreshControl={<RefreshControl tintColor="rgba(51, 51, 51, 0.1)" onRefresh={onRefresh} />}
       style={styles.container}
     />
   );
@@ -18,6 +24,7 @@ const ArticleFeedList = ({ data, renderItem }) => {
 ArticleFeedList.propTypes = {
   data: arrayOf(shape()).isRequired,
   renderItem: func.isRequired,
+  fetchArticles: func.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -26,4 +33,14 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ArticleFeedList;
+const mapStateToProps = () => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchArticles: () => { dispatch(fetchTimeline()); },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleFeedList);
