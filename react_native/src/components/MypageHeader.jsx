@@ -2,13 +2,14 @@ import React from 'react';
 import {
   View, Image, Text, StyleSheet, ScrollView, RefreshControl,
 } from 'react-native';
+import { connect } from 'react-redux';
 import {
   shape, string, number, bool,
 } from 'prop-types';
 
 import Header from './Header';
 
-const MypageHeader = ({ user }) => {
+const MypageHeader = ({ auth }) => {
   return (
     <View style={styles.container}>
       <Header />
@@ -17,24 +18,24 @@ const MypageHeader = ({ user }) => {
         refreshControl={<RefreshControl tintColor="rgba(51, 51, 51, 0.1)" />}
       >
         <View style={styles.userInfo}>
-          <Image source={{ uri: user.profile_image_url }} style={styles.userImage} />
+          <Image source={{ uri: auth.profile_image_url }} style={styles.userImage} />
           <View style={styles.analysisItem}>
-            <Text style={styles.analysisNumber}>{user.items_count}</Text>
+            <Text style={styles.analysisNumber}>{auth.items_count}</Text>
             <Text style={styles.analysisUnit}>記事</Text>
           </View>
           <View style={styles.analysisItem}>
-            <Text style={styles.analysisNumber}>{user.followees_count}</Text>
+            <Text style={styles.analysisNumber}>{auth.followees_count}</Text>
             <Text style={styles.analysisUnit}>フォロー</Text>
           </View>
           <View style={styles.analysisItem}>
-            <Text style={styles.analysisNumber}>{user.followers_count}</Text>
+            <Text style={styles.analysisNumber}>{auth.followers_count}</Text>
             <Text style={styles.analysisUnit}>フォロワー</Text>
           </View>
         </View>
         <View style={styles.userProfile}>
           {/* eslint-disable-next-line */}
-          <Text style={styles.userId}>@{user.id}</Text>
-          <Text style={styles.userDesc}>{user.description}</Text>
+          <Text style={styles.userId}>@{auth.id}</Text>
+          <Text style={styles.userDesc}>{auth.description}</Text>
         </View>
       </ScrollView>
     </View>
@@ -42,7 +43,7 @@ const MypageHeader = ({ user }) => {
 };
 
 MypageHeader.propTypes = {
-  user: shape({
+  auth: shape({
     description: string,
     facebook_id: string,
     followees_count: number,
@@ -104,4 +105,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MypageHeader;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+  };
+};
+
+export default connect(mapStateToProps)(MypageHeader);
