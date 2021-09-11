@@ -1,14 +1,18 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { Provider } from 'react-redux';
 
 import StackNavigator from './src/navigataions/StackNavigator';
+import store from './store';
 
 export default function App() {
   return (
-    <NavigationContainer style={styles.container}>
-      <StackNavigator />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer style={styles.container}>
+        <StackNavigator />
+      </NavigationContainer>
+    </Provider>
   );
 }
 
